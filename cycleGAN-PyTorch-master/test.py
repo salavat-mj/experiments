@@ -28,15 +28,15 @@ def test(args):
     a_test_loader = torch.utils.data.DataLoader(a_test_data, batch_size=args.batch_size, shuffle=True, num_workers=4)
     b_test_loader = torch.utils.data.DataLoader(b_test_data, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
-    Gab = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm, 
+    Gab = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm,
                                                     use_dropout= not args.no_dropout, gpu_ids=args.gpu_ids)
-    Gba = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm, 
+    Gba = define_Gen(input_nc=3, output_nc=3, ngf=args.ngf, netG='resnet_9blocks', norm=args.norm,
                                                     use_dropout= not args.no_dropout, gpu_ids=args.gpu_ids)
 
     utils.print_networks([Gab,Gba], ['Gab','Gba'])
 
     try:
-        ckpt = utils.load_checkpoint('%s/latest.ckpt' % (args.checkpoint_dir))
+        ckpt = utils.load_checkpoint('%s/latest.pth' % (args.checkpoint_dir))
         Gab.load_state_dict(ckpt['Gab'])
         Gba.load_state_dict(ckpt['Gba'])
     except:
@@ -47,7 +47,7 @@ def test(args):
     a_real_test = Variable(iter(a_test_loader).next()[0], requires_grad=True)
     b_real_test = Variable(iter(b_test_loader).next()[0], requires_grad=True)
     a_real_test, b_real_test = utils.cuda([a_real_test, b_real_test])
-            
+
 
     Gab.eval()
     Gba.eval()
@@ -64,4 +64,3 @@ def test(args):
         os.makedirs(args.results_dir)
 
     torchvision.utils.save_image(pic, args.results_dir+'/sample.jpg', nrow=3)
-
