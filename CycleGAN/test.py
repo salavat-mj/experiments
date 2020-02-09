@@ -58,4 +58,4 @@ if __name__ == '__main__':
     if label == 'real':
         label, im_data = next(visuals.items())
     im = util.tensor2im(im_data)
-    util.save_image(im, './result/', aspect_ratio=aspect_ratio)
+    util.save_image(im, web_dir, aspect_ratio=aspect_ratio)
