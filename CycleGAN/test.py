@@ -31,7 +31,7 @@ from options.test_options import TestOptions
 from data import create_dataset
 from models import create_model
 #from util.visualizer import save_images
-from CycleGAN.util.util import tensor2im, save_image
+from util.util import tensor2im, save_image
 
 if __name__ == '__main__':
     opt = TestOptions().parse()  # get test options
@@ -42,9 +42,8 @@ if __name__ == '__main__':
     opt.no_flip = True    # no flip; comment this line if results on flipped images are needed.
     opt.display_id = -1   # no visdom display; the test code saves the results to a HTML file.
 
-    opt.name = 'style_ukiyoe_pretrained'
-    opt.dataroot = 'testB'
-
+    #opt.name = 'style_ukiyoe_pretrained'
+    #opt.dataroot = 'testB'
     opt.model = 'test'
     opt.no_dropout = True
     opt.results_dir = opt.dataroot
