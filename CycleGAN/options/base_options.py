@@ -8,7 +8,6 @@ import data
 
 class BaseOptions():
     """This class defines options used during both training and test time.
-
     It also implements several helper functions such as parsing, printing, and saving the options.
     It also gathers additional options defined in <modify_commandline_options> functions in both dataset class and model class.
     """
@@ -87,7 +86,6 @@ class BaseOptions():
 
     def print_options(self, opt):
         """Print and save options
-
         It will print both current options and default values(if different).
         It will save options into a text file / [checkpoints_dir] / opt.txt
         """
